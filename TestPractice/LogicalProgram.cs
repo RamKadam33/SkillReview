@@ -238,5 +238,122 @@ namespace TestPractice
 
 
         }
+        [Test]
+        public void ConsecutiveNumbers()
+        {
+
+            int[] nums = { 100, 4, 200, 1, 3, 2 };
+
+            int longest = 0;
+            if (nums.Length == 0)
+            {
+                longest=-1;
+            }
+            else
+            {
+               HashSet<int> numSet = new HashSet<int>(nums);
+
+            foreach (int num in numSet)
+            {
+                // Only start counting if num is the start of a sequence
+                if (!numSet.Contains(num - 1))
+                {
+                    int currentNum = num;
+                    int currentStreak = 1;
+
+                    while (numSet.Contains(currentNum + 1))
+                    {
+                        currentNum += 1;
+                        currentStreak += 1;
+                    }
+
+                    longest = Math.Max(longest, currentStreak);
+                }
+            }
+            }
+           
+        }
+        [Test]
+        public void SortSimilarWord()
+        {
+            string[] strs = { "eat", "tea", "tan", "ate", "nat", "bat" };
+            var dict = new Dictionary<string, List<string>>();
+
+            foreach (var word in strs)
+            {
+                // Sort the characters in the word
+                var chars = word.ToCharArray();
+                Array.Sort(chars);
+                string key = new string(chars);
+
+                // Add the word to the corresponding group
+                if (!dict.ContainsKey(key))
+                    dict[key] = new List<string>();
+                dict[key].Add(word);
+            }
+
+            foreach (var group in dict.Values)
+            {
+                Console.WriteLine(string.Join(", ", group));
+            }
+            
+        }
+        [Test]
+        public void ArrayElementMapping()
+        {
+            
+                string pattern = "abba";
+                string s = "dog dog dog dog";
+                string[] words = s.Split(' ');
+
+                if (pattern.Length != words.Length)
+                {
+                    Console.WriteLine(false);
+                    return;
+                }
+
+                Dictionary<char, string> charToWord = new Dictionary<char, string>();
+                Dictionary<string, char> wordToChar = new Dictionary<string, char>();
+
+                for (int i = 0; i < pattern.Length; i++)
+                {
+                    char c = pattern[i];
+                    string w = words[i];
+                    // Check if mapping exists and is consistent
+                    if (charToWord.ContainsKey(c))
+                    {
+                        string word = charToWord[c];
+                        if (charToWord[c] != w)
+                        {
+                            Console.WriteLine(false);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        charToWord[c] = w;
+                    }
+
+                // Check reverse mapping for uniqueness
+                if (wordToChar.ContainsKey(w))
+                {
+                    if (wordToChar[w] != c)
+                    {
+                        Console.WriteLine(false);
+                        return;
+                    }
+                }
+                else
+                {
+                    wordToChar[w] = c;
+                }
+                }
+
+                Console.WriteLine(true);
+            }
+        
+
     }
-}
+    }
+    
+

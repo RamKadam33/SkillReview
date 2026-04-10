@@ -11,8 +11,7 @@ namespace TestPractice.Factory
     public abstract class LoginPageFactory
     {
         protected IWebDriver _driver;
-        public LoginPageFactory(IWebDriver driver) { _driver = driver; }
-        
+        public LoginPageFactory(IWebDriver driver) { _driver = driver; }        
         public abstract ILoginPage CreateLoginPage();
     }
 }

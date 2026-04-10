@@ -36,7 +36,7 @@ namespace SkilReview.Collections
             list.ForEach(Console.WriteLine);
             Console.WriteLine("Final list:");
             foreach (var item in list)
-                Console.WriteLine(item);
+               Console.WriteLine(item);
             Console.WriteLine("Has 20? " + has20);
             Console.WriteLine("Index of 30: " + index30);
             Console.WriteLine("Array: " + string.Join(", ", arr));

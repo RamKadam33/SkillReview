@@ -1,24 +1,37 @@
-﻿using BusinessLayer.Modules;
+﻿using Bogus;
+using BusinessLayer.Modules;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel.Client;
+using Newtonsoft.Json;
+using NUnit.Framework;
+using OpenQA.Selenium.DevTools.V143.Network;
 using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using TestPractice.Builder;
-using NUnit.Framework;
-using System.Net;
-using Newtonsoft.Json;
-using OpenQA.Selenium.DevTools.V143.Network;
-using Bogus;
 
 
 namespace TestPractice.API
 {
     public class APITests
     {
-         
+     /*   // 1. Get the token
+        var loginRequest = new RestRequest("/auth/login", Method.Post);
+        loginRequest.AddJsonBody(new { username = "user", password = "pass" });
 
+var loginResponse = await client.ExecuteAsync(loginRequest);
+    var token = //* extract token from loginResponse.Content, e.g., using JSON parsing 
+
+     2. Use the token in another request
+    var apiRequest = new RestRequest("/endpoint", Method.Get);
+    apiRequest.AddHeader("Authorization", $"Bearer {token}");
+
+var apiResponse = await client.ExecuteAsync(apiRequest);
+    Console.WriteLine(apiResponse.Content);
+    */
         private readonly string _url = "https://petstore.swagger.io/v2";
         private RestClient? _restClient;
         private RestRequest? _request;
@@ -32,7 +45,7 @@ namespace TestPractice.API
             _restClient = new RestClient(_url);
             _request = new RestRequest($"/pet/{id}", Method.Get);
             _request.AddHeader("Accept", "application/json");
-                             
+            //_request.AddHeader("Authorization", "Bearer YOUR_ACCESS_TOKEN");
             response = _restClient.Execute(_request);
 
            
@@ -94,13 +107,9 @@ namespace TestPractice.API
             var client = new RestClient(_url);
             var request = new RestRequest("/pet", Method.Post);
 
-           request.AddHeader("Accept", "application/json");
-            request.AddHeader("Accept", "application/json");
+            request.AddHeader("Accept", "application/json");            
             
-            request.AddStringBody(body, DataFormat.Json);
-
-            
-            
+            request.AddStringBody(body, DataFormat.Json);               
 
            
             RestResponse<GetPetById> _response = client.Execute<GetPetById>(request);
@@ -153,8 +162,7 @@ namespace TestPractice.API
             Assert.IsNotNull(response.Data, "Deserialized response data should not be null.");
             Assert.AreEqual(id, response.Data.Id, "Pet ID in response does not match the request.");
             Assert.AreEqual(name, response.Data.Name, "Pet name in response does not match the request.");
-            Assert.AreEqual(status, response.Data.Status, "Pet status in response does not match the request.");
-            
+            Assert.AreEqual(status, response.Data.Status, "Pet status in response does not match the request.");          
 
         }
 

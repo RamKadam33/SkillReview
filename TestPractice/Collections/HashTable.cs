@@ -21,9 +21,9 @@ namespace TestPractice.Collections
             h1.Add("3", "geeks");
             h1.Add("4", "for");
             h1.Add("5", "geeks");
+            h1.Add("a", 6);
 
 
-           
             Hashtable h2 = Hashtable.Synchronized(h1);
 
            

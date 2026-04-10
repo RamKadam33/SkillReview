@@ -15,7 +15,7 @@ namespace TestPractice.Factory
         {
             IWebDriver driver = new ChromeDriver(); // Properly initialize the driver
 
-           //oginPageFactory factory = new WebLoginPageFactory(driver);
+           //LoginPageFactory factory = new WebLoginPageFactory(driver);
              LoginPageFactory factory = new ResponsiveLoginPageFactory(driver);
 
             driver.Navigate().GoToUrl("https://practicetestautomation.com/practice-test-login/");
@@ -27,7 +27,7 @@ namespace TestPractice.Factory
             Thread.Sleep(500);
             loginPage.ClickLogin();
             Thread.Sleep(500);
-           Assert.IsTrue( driver.FindElement(By.XPath("//a[text()='Log out']")).Displayed);
+            Assert.IsTrue( driver.FindElement(By.XPath("//a[text()='Log out']")).Displayed);
 
             driver.Quit();
         }

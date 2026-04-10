@@ -13,10 +13,11 @@ namespace SkilReview.Collections
         {
             SortedList list = new SortedList();
 
+            list.Add("banana", 1);
             list.Add("apple", 1);
-            list.Add("banana", 2);
             list.Add("cherry", 3);
-
+            // list.Add(10, "d");   not allowed, keys must be of the same type
+            list.Add("m", "d");
             list["date"] = 4;
 
             int count = list.Count;
